@@ -13,16 +13,38 @@
             "jsx": true
         },
         "ecmaVersion": "latest",
-        "sourceType": "module",
-        "project": "./tsconfig.json"
+        "sourceType": "module"
     },
     "plugins": [
         "react",
         "@typescript-eslint"
     ],
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ]
+            }
+        }
+    },
     "rules": {
             "@typescript-eslint/consistent-type-definitions": "off",
             "@typescript-eslint/strict-boolean-expressions": "off",
-            "no-undef": "off"
+            "no-undef": "off",
+            "react/jsx-filename-extension": 0,
+            "import/extensions": [
+                "error",
+                "ignorePackages",
+                {
+                    "js": "never",
+                    "jsx": "never",
+                    "ts": "never",
+                    "tsx": "never"
+                }
+            ]
     }
 }
