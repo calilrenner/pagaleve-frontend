@@ -1,8 +1,17 @@
 import React from 'react';
-import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import SearchIcon from '@mui/icons-material/Search';
+import Box from '@mui/material/Box';
+import themes from '../styles/themes';
 
 export default function TopBar() {
   return (
-    <Typography variant="h2" component="h1">Clientes</Typography>
+    <Box sx={{
+      display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
+    }}
+    >
+      <SearchIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+      <TextField id="filled-basic" label="Search" variant="standard" />
+    </Box>
   );
 }
