@@ -35,6 +35,8 @@
             "@typescript-eslint/consistent-type-definitions": "off",
             "@typescript-eslint/strict-boolean-expressions": "off",
             "no-undef": "off",
+            "react/jsx-props-no-spreading": 0,
+            "no-nested-ternary": "off",
             "react/jsx-filename-extension": 0,
             "import/extensions": [
                 "error",

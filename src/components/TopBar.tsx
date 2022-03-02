@@ -2,7 +2,6 @@ import React from 'react';
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import Box from '@mui/material/Box';
-import themes from '../styles/themes';
 
 export default function TopBar() {
   return (
