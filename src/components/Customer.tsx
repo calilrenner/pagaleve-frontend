@@ -1,16 +1,26 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-boolean-value */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import {
-  Box, ListItemText, ListItemButton, ListItemIcon, Fade, InputBase,
+  Box,
+  ListItemText,
+  ListItemButton,
+  ListItemIcon,
+  Fade,
+  InputBase,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import { upsertCustomer } from '../services/pagaLeve';
+import { customerContext } from '../contexts/customerContext';
 
-export default function Customer({ data }) {
+export default function Customer(props) {
   const [editSelect, setEditSelect] = useState<boolean>(false);
   const [editDisabled, setEditDisabled] = useState<boolean>(false);
   const [newData, setNewData] = useState<string>('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const { reload, setReload } = useContext(customerContext);
+
+  const { data, name, id } = props;
 
   useEffect(() => {
     if (editSelect) {
@@ -25,15 +35,16 @@ export default function Customer({ data }) {
     if (e.code === 'Enter' && editSelect) {
       setEditDisabled(true);
       setEditSelect(false);
-    //   putEdit()
-    //     .then(() => {
-    //       setEditDisabled(false);
-    //       setEditSelect(false);
-    //     })
-    //     .catch(() => {
-    //       setEditDisabled(false);
-    //       alert('Não foi possível salvar as alterações!');
-    //     });
+      upsertCustomer({ id, name, [data.key]: newData })
+        .then(() => {
+          setReload(!reload);
+          setEditDisabled(false);
+          setEditSelect(false);
+        })
+        .catch(() => {
+          setEditDisabled(false);
+          alert('Não foi possível salvar as alterações!');
+        });
     }
   }
 
@@ -53,21 +64,30 @@ export default function Customer({ data }) {
           },
         }}
       >
-        <ListItemIcon sx={{ color: '#271188cc' }}>
-          {data.icon}
-        </ListItemIcon>
-        {editSelect ? <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}><InputBase ref={inputRef} onKeyUp={(e) => confirmEdit(e)} value={newData} onChange={(e) => setNewData(e.target.value)} sx={{ width: '100%', color: 'gray', fontSize: '14px' }} /></Box> : (
+        <ListItemIcon sx={{ color: '#271188cc' }}>{data.icon}</ListItemIcon>
+        {editSelect ? (
+          <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+            <InputBase
+              ref={inputRef}
+              onKeyUp={(e) => confirmEdit(e)}
+              value={newData}
+              onChange={(e) => setNewData(e.target.value)}
+              sx={{ width: '100%', color: 'gray', fontSize: '14px' }}
+            />
+          </Box>
+        ) : (
           <ListItemText
             primary={data.label}
             primaryTypographyProps={{ fontSize: 14, fontWeight: 'medium' }}
           />
         )}
-        <EditIcon onClick={() => {
-          if (!editDisabled) {
-            setNewData(data.label);
-            setEditSelect(!editSelect);
-          }
-        }}
+        <EditIcon
+          onClick={() => {
+            if (!editDisabled) {
+              setNewData(data.label);
+              setEditSelect(!editSelect);
+            }
+          }}
         />
       </ListItemButton>
     </Fade>

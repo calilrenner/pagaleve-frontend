@@ -6,13 +6,8 @@ export function getCustomers() {
   return axios.get(`${URL}/`);
 }
 
-export function editCustomer(text: string) {
-  const body = { text };
-  return axios.put(`${URL}/edit-customer`, body);
-}
-
-export function postCustomer(customer) {
-  return axios.post(`${URL}/new-customer`, customer);
+export function upsertCustomer(customer) {
+  return axios.put(`${URL}/upsert-customer`, customer);
 }
 
 export function deleteCustomer(id) {
