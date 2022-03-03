@@ -28,11 +28,10 @@ export default function Customers() {
     });
   }, [reload]);
 
-  const normalizedString = (string: string): string =>
-    string
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLocaleLowerCase();
+  const normalizedString = (string: string): string => string
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLocaleLowerCase();
 
   const handleFilteredCustomers = (handleSearch) => {
     const filter = apiData[handleSearch[0]?.toUpperCase()]?.filter(
@@ -41,7 +40,7 @@ export default function Customers() {
           return true;
         }
         return false;
-      }
+      },
     );
     if (filter?.length === 0) return null;
     return filter;
@@ -204,7 +203,7 @@ export default function Customers() {
               };
 
               return <CustomersContainer {...formattedData} />;
-            }
+            },
           )}
         </>
       )}

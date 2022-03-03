@@ -1,5 +1,7 @@
 import React from 'react';
-import { Modal, Box, Typography, Button } from '@mui/material';
+import {
+  Modal, Box, Typography, Button,
+} from '@mui/material';
 
 interface Props {
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -9,7 +11,9 @@ interface Props {
 }
 
 export default function Alert(props: Props) {
-  const { open, setOpen, setDelete, message } = props;
+  const {
+    open, setOpen, setDelete, message,
+  } = props;
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',

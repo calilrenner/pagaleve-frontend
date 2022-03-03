@@ -71,8 +71,8 @@ export default function CustomersContainer({
           />
         </ListItemButton>
 
-        {open &&
-          info.map(
+        {open
+          && info.map(
             (data: {
               label: string;
               icon:
@@ -80,7 +80,7 @@ export default function CustomersContainer({
                 | React.ReactChild
                 | React.ReactFragment
                 | React.ReactPortal;
-            }) => <Customer id={id} name={name} data={data} />
+            }) => <Customer id={id} name={name} data={data} />,
           )}
         {open && (
           <Fade in={true} timeout={1500}>

@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-boolean-value */
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, {
+  useState, useRef, useEffect, useContext,
+} from 'react';
 import {
   Box,
   ListItemText,
@@ -45,11 +47,11 @@ export default function Customer(props) {
         })
         .catch((err) => {
           setEditDisabled(false);
-          <Alert
-            open={open}
-            setOpen={setOpen}
-            message={err.response.data.message}
-          />;
+            <Alert
+              open={open}
+              setOpen={setOpen}
+              message={err.response.data.message}
+            />;
         });
     }
   }
