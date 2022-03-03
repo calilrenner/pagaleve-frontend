@@ -1,6 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const DotenvWebpackPlugin = require('dotenv-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -34,5 +35,11 @@ module.exports = {
     react: 'React',
     'react-dom': 'ReactDOM',
   },
-  plugins: [new CleanWebpackPlugin(), new DotenvWebpackPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new DotenvWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'public', 'index.html'),
+    }),
+  ],
 };
