@@ -13,7 +13,6 @@ import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import { Link } from 'react-router-dom';
-// import Loading from '../components/Loading';
 import { customerContext } from '../contexts/customerContext';
 import { getCustomers } from '../services/pagaLeve';
 import CustomersContainer from '../components/CustomersContainer';
@@ -22,7 +21,6 @@ export default function Customers() {
   const [search, setSearch] = useState<string>('');
   const [apiData, setApiData] = useState({});
   const { reload } = useContext(customerContext);
-  // const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     getCustomers().then((res) => {
