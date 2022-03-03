@@ -12,11 +12,13 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import { upsertCustomer } from '../services/pagaLeve';
 import { customerContext } from '../contexts/customerContext';
+import Alert from './Alert';
 
 export default function Customer(props) {
   const [editSelect, setEditSelect] = useState<boolean>(false);
   const [editDisabled, setEditDisabled] = useState<boolean>(false);
   const [newData, setNewData] = useState<string>('');
+  const [open, setOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const { reload, setReload } = useContext(customerContext);
 
@@ -41,9 +43,13 @@ export default function Customer(props) {
           setEditDisabled(false);
           setEditSelect(false);
         })
-        .catch(() => {
+        .catch((err) => {
           setEditDisabled(false);
-          alert('Não foi possível salvar as alterações!');
+          <Alert
+            open={open}
+            setOpen={setOpen}
+            message={err.response.data.message}
+          />;
         });
     }
   }
